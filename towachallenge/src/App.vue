@@ -1,33 +1,40 @@
 <template>
   <header>
     <img class="logoTop" alt="catnyou logo" src="@/assets/catnyou.png">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/random">Random</router-link>
-    </nav>
+    <NavRouter />
   </header>
   <main>
         <router-view/>
   </main>
   <footer>
         <div class="container">
-          <div class="col"><img class="logoBottom" alt="catnyou logo" src="@/assets/catnyou.png"></div>
           <div class="col">
-            <nav>
-              <router-link to="/">Home</router-link> |
-              <router-link to="/about">About</router-link> |
-              <router-link to="/random">Random</router-link>
-            </nav>
+            <img class="logoBottom" alt="catnyou logo" src="@/assets/catnyou.png">
           </div>
           <div class="col">
-            <div>4 Privet Drive</div>
-            <div>Little Whinging, Surrey</div>
-            <div>England</div>
+            <NavRouter />
+          </div>
+          <div class="col">
+            <address>4 Privet Drive<br>
+            Little Whinging, Surrey<br>
+            England</address>
+            <div>Contact us via <a href=mailto:catnyou@gmail.com>E-Mail</a>
+             or <a href=tel:+999999999> Phone</a></div>
+             <div>catnyou@gmail.com | +999 999 999</div>
           </div>
         </div>
   </footer>
 </template>
+
+<script>
+import NavRouter from '@/components/NavRouter.vue'
+
+export default {
+  components: {
+    NavRouter
+  }
+}
+</script>
 
 <style>
 #app {
@@ -38,11 +45,32 @@
   color: #2c3e50;
 }
 
+header {
+  padding: 10px 30px;
+  background-color: rgba(183, 224, 210, 20%)
+}
+
+footer {
+  font-size: 13px;
+  padding: 25px;
+}
+
+footer .col {
+  margin: -15px;
+}
+.logoTop {
+  height: 100px;
+
+}
+.logoBottom {
+  height: 70px;
+}
+
 nav {
   padding: 30px;
 }
 
-nav a {
+nav a, a:link {
   font-weight: bold;
   color: #2c3e50;
 }
@@ -51,14 +79,4 @@ nav a.router-link-exact-active {
   color: #42b983;
 }
 
-header {
-  padding: 10px 30px;
-  background-color: rgba(183, 224, 210, 20%)
-}
-.logoTop {
-  height: 100px;
-}
-.logoBottom {
-  height: 70px;
-}
 </style>
