@@ -21,30 +21,17 @@
 
 <script>
 export default {
-    props: {
-        items: { // Define poperty called items that is an array and will have to be passed in
-            type: Array,
-            required: true
-        }
+  props: {
+    items: { // Define poperty called items that is an array and will have to be passed in
+      type: Array,
+      required: true
     }
+  }
 }
 </script>
 
 <style>
-/*On mobile we only want 1 column*/
 .card {
     width: 100%;
-}
-/*On tablet we want 2 columns*/
-@media (min-width: 768px) {
-    .card {
-        width: 50%;
-    }
-}
-/*On Desktop we want 3 columns*/
-@media (min-width: 992px) {
-    .card {
-        width: 33.33%
-    }
 }
 </style>
