@@ -1,21 +1,21 @@
 <template>
-  <header>
+  <header> <!--Header with Logo and Navbar-->
     <img class="logoTop" alt="catnyou logo" src="@/assets/catnyou.png">
-    <NavRouter />
+    <NavRouter /> <!--Navigation Bar Component-->
   </header>
-  <main>
+  <main> <!--Insert .vue for whichever router is selected-->
         <router-view/>
   </main>
-  <footer>
-        <div class="container">
+  <footer> <!--Footer with Logo, Navbar and Address-->
+        <div class="container"> <!--Responsive Bootstrap container-->
           <div class="col">
             <img class="logoBottom" alt="catnyou logo" src="@/assets/catnyou.png">
           </div>
           <div class="col">
-            <NavRouter />
+            <NavRouter /> <!--Navigation Bar Component-->
           </div>
           <div class="col">
-            <address>4 Privet Drive<br>
+            <address>4 Privet Drive<br> <!--address for easier SEO-->
             Little Whinging, Surrey<br>
             England</address>
             <div>Contact us via <a href=mailto:catnyou@gmail.com>E-Mail</a>
@@ -31,7 +31,7 @@ import NavRouter from '@/components/NavRouter.vue'
 
 export default {
   components: {
-    NavRouter
+    NavRouter // Import NavRouter.vue Component so no repetition
   }
 }
 </script>
@@ -52,16 +52,13 @@ header {
 
 footer {
   font-size: 13px;
-  padding: 25px;
+  padding: 10px 30px;
 }
 
-footer .col {
-  margin: -15px;
-}
 .logoTop {
   height: 100px;
-
 }
+
 .logoBottom {
   height: 70px;
 }
