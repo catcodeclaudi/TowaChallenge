@@ -1,6 +1,6 @@
 <template>
   <header> <!--Header with Logo and Navbar-->
-    <img class="logoTop" alt="catnyou logo" src="@/assets/catnyou.png">
+    <img class="logoTop" alt="catnyou logo" src="@/assets/logo.png">
     <NavRouter /> <!--Navigation Bar Component-->
   </header>
   <main> <!--Insert .vue for whichever router is selected-->
@@ -9,7 +9,7 @@
   <footer> <!--Footer with Logo, Navbar and Address-->
         <div class="container"> <!--Responsive Bootstrap container-->
           <div class="col">
-            <img class="logoBottom" alt="catnyou logo" src="@/assets/catnyou.png">
+            <img class="logoBottom" alt="catnyou logo" src="@/assets/logo.png">
           </div>
           <div class="col">
             <NavRouter /> <!--Navigation Bar Component-->
@@ -46,34 +46,38 @@ export default {
 }
 
 header {
-  padding: 10px 30px;
-  background-color: rgba(183, 224, 210, 20%)
+  padding: 10px;
+  background: rgba(67, 109, 103, 0.4);
+}
+
+main {
+  background-color: rgba(67, 109, 103, 0.4);
 }
 
 footer {
   font-size: 13px;
-  padding: 10px 30px;
+  padding: 10px;
+  background: rgba(67, 109, 103, 0.4);
 }
 
-.logoTop {
-  height: 100px;
-}
-
-.logoBottom {
+.logoTop, .logoBottom {
   height: 70px;
 }
 
 nav {
   padding: 30px;
 }
+/* I want the footer to be tighter*/
+footer nav {
+  padding: 10px;
+}
 
 nav a, a:link {
   font-weight: bold;
-  color: #2c3e50;
+  color: #1f3f40;
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #0e9088;
 }
-
 </style>
