@@ -1,5 +1,7 @@
 <template>
   <div class="home">
+    <h2>Welcome!</h2>
+    <p>On this website you can explore different cat breeds.</p>
     <GridCards :items="catbreeds" /> <!--Insert GridCards component with its items-->
     <div class="disclaimer">
       Disclaimer: I was doing some research on breeding as I was working on this Project.

@@ -6,8 +6,8 @@
             <!--Give class to make grid responsive for every device, in case media queries don't work or different size-->
             <div v-for="item in items" :key="item.id" class="col-12 col-md-6 col-lg-4 mx-auto">
                 <div @click="RedirectToLink(item.url)"> <!--We want the whole card to be clickable, create method because it is cleaner-->
-                    <div class="card bg-dark w-100" title="Click to learn more (Opens new tab to external website)">
-                        <img :src="item.image" class="card-img-top" :alt="item.title">
+                    <div class="card-with-radius bg-dark w-100" title="Click to learn more (Opens new tab to external website)">
+                        <img :src="item.image" class="card-image" :alt="item.title">
                         <div class="card-body">
                             <h5 class="card-title">{{ item.title }}</h5>
                             <p class="card-text">{{ item.text }}</p>
@@ -40,22 +40,28 @@ export default {
     padding: 10px;
 }
 
-.card-img-top {
-    padding: 3px;
-    border-radius: 5px;;
-}
-
-.card {
+/* Applied special class here so that I can change the border radius*/
+.card-with-radius {
     padding: 10px;
     margin-top: 12px;
     margin-bottom: 12px;
+    border-radius: 30px;
+}
+
+.card-image {
+    border-radius: 30px;
+    width: 100%;
+    height: auto;
+    padding: 10px;
 }
 
 .card-body {
     height: 150px;
+    margin: 10px;
 }
 
 .card-title, .card-text {
+    padding: 10px;
     color:rgb(191, 196, 196);
 }
 /* We want the hover over the card as clickable to be ovious*/
