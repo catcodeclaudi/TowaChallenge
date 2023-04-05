@@ -4,13 +4,17 @@
             <!--Loop through item that gets passed to items-->
             <!--Define unique key-->
             <!--Give class to make grid responsive for every device, in case media queries don't work or different size-->
-            <div v-for="item in items" :key="item.id" class="col-12 col-md-6 col-lg-4 mx-auto">
-                <div @click="RedirectToLink(item.url)"> <!--We want the whole card to be clickable, create method because it is cleaner-->
+            <div v-for="poke in pokemon" :key="poke.id" :pokemon="poke" class="col-12 col-md-6 col-lg-4 mx-auto">
+                <div @click="RedirectToLink(poke.url)"> <!--We want the whole card to be clickable, create method because it is cleaner-->
                     <div class="card-with-radius bg-dark w-100" title="Click to learn more (Opens new tab to external website)">
-                        <img :src="item.image" class="card-image" :alt="item.title">
+                        <img :src="poke.image" class="card-image" :alt="poke.name">
                         <div class="card-body">
-                            <h5 class="card-title">{{ item.title }}</h5>
-                            <p class="card-text">{{ item.text }}</p>
+                            <h5 class="card-title">{{ poke.name }}</h5>
+                            <p class="card-text">
+                                ID: {{ poke.id }}<br>
+                                Height: {{ poke.height }} ft<br>
+                                Weight: {{ poke.weight }} lbs<br>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -22,14 +26,14 @@
 <script>
 export default {
   props: {
-    items: { // Define poperty called items that is an array and will have to be passed in
+    pokemon: { // Define poperty called items that is an array and will have to be passed in
       type: Array,
       required: true
     }
   },
   methods: { // Define method that on click opens up url
     RedirectToLink (url) {
-      window.open(url, '_blank', 'noreferrer', 'noopener') // blank so new tab, noreferrer and noopener for security
+      window.open(url, '_blank', 'noreferrer noopener') // blank so new tab, noreferrer and noopener for security
     }
   }
 }
@@ -50,22 +54,21 @@ export default {
 
 .card-image {
     border-radius: 30px;
-    width: 100%;
+    width: 60%;
     height: auto;
     padding: 10px;
 }
 
 .card-body {
-    height: 150px;
-    margin: 10px;
+    height: 125px;
+    margin: 5px;
 }
 
 .card-title, .card-text {
-    padding: 10px;
-    color:rgb(191, 196, 196);
+    color:rgb(204, 209, 209);
 }
 /* We want the hover over the card as clickable to be ovious*/
-.card:hover {
+.card-with-radius:hover {
     cursor:pointer;
 }
 

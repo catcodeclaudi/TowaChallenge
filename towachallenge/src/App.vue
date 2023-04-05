@@ -65,7 +65,7 @@ footer {
 }
 
 nav {
-  padding: 30px;
+  padding: 20px;
 }
 /* I want the footer to be tighter*/
 footer nav {
