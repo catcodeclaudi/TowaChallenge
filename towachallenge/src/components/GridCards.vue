@@ -14,6 +14,7 @@
                                 ID: {{ poke.id }}<br>
                                 Height: {{ poke.height }} ft<br>
                                 Weight: {{ poke.weight }} lbs<br>
+                                Type: {{ poke.type }}<br>
                             </p>
                         </div>
                     </div>
@@ -60,7 +61,7 @@ export default {
 }
 
 .card-body {
-    height: 125px;
+    height: 150px;
     margin: 5px;
 }
 

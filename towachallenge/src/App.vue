@@ -15,12 +15,12 @@
             <NavRouter /> <!--Navigation Bar Component-->
           </div>
           <div class="col">
-            <address>4 Privet Drive<br> <!--address for easier SEO-->
-            Little Whinging, Surrey<br>
-            England</address>
+            <address>Pallet House<br> <!--address for easier SEO-->
+            Pallet Town<br>
+            Kanto</address>
             <div>Contact us via <a href=mailto:catnyou@gmail.com>E-Mail</a>
              or <a href=tel:+999999999> Phone</a></div>
-             <div>catnyou@gmail.com | +999 999 999</div>
+             <div>theverybest@gmail.com | +999 999 999</div>
           </div>
         </div>
   </footer>
@@ -52,6 +52,7 @@ header {
 
 main {
   background-color: rgba(67, 109, 103, 0.4);
+  padding: 5px;
 }
 
 footer {
