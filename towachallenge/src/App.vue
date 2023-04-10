@@ -6,34 +6,22 @@
   <main> <!--Insert .vue for whichever router is selected-->
         <router-view/>
   </main>
-  <footer> <!--Footer with Logo, Navbar and Address-->
-        <div class="container"> <!--Responsive Bootstrap container-->
-          <div class="col">
-            <img class="logoBottom" alt="logo" src="@/assets/logo.png">
-          </div>
-          <div class="col">
-            <NavRouter /> <!--Navigation Bar Component-->
-          </div>
-          <div class="col">
-            <address>Pallet House<br> <!--address for easier SEO-->
-            Pallet Town<br>
-            Kanto</address>
-            <div>Contact us via <a href=mailto:theverybest@gmail.com>E-Mail</a>
-             or <a href=tel:+999999999> Phone</a></div>
-             <div>theverybest@gmail.com | +999 999 999</div>
-          </div>
-        </div>
+  <footer> <!--Footer Component with Logo, Navbar and Address-->
+        <FooterComp />
   </footer>
 </template>
 
 <script>
 import NavRouter from '@/components/NavRouter.vue'
+import FooterComp from '@/components/FooterComp.vue'
 
 export default {
   components: {
-    NavRouter // Import NavRouter.vue Component so no repetition
+    NavRouter, // Import NavRouter.vue Component so no repetition
+    FooterComp
   }
 }
+
 </script>
 
 <style>
@@ -43,6 +31,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 header {
@@ -51,14 +42,9 @@ header {
 }
 
 main {
+  flex: 1;
   background-color: rgba(67, 109, 103, 0.4);
   padding: 5px;
-}
-
-footer {
-  font-size: 13px;
-  padding: 10px;
-  background: rgba(67, 109, 103, 0.4);
 }
 
 .logoTop, .logoBottom {
@@ -67,10 +53,6 @@ footer {
 
 nav {
   padding: 20px;
-}
-/* I want the footer to be tighter*/
-footer nav {
-  padding: 10px;
 }
 
 nav a, a:link {

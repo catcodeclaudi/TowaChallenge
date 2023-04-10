@@ -2,22 +2,27 @@
   <div class="home">
     <h2>Welcome!</h2>
     <!--We can only display 916 Pokémon if we want the nice artwork, working on it-->
-    <p class="welcome">Here you can search for your favorite (or least favorite) Pokémon!<br> If you click the card you will be redirected to the official Pokédex
-       where you can find more relevant data, so
-        <a target="_blank" class="link-dark" title="The best theme song EVER" href="https://www.youtube.com/watch?v=rg6CiPI6h2g&ab_channel=kerwinpogi092">
-        YOU can become the very best.*</a></p>
-       <p class="warning">*if you follow this link to the best theme song ever, be warned of the volume</p>
+    <p class="welcomeText m-2">Here you can search for your favorite (or least favorite) Pokémon!<br>
+      If you click the card a new tab will be opened, leading you to the official Pokédex entry. There you can find more relevant data, so
+      <a target="_blank" class="link-dark" title="The best theme song EVER" href="https://www.youtube.com/watch?v=rg6CiPI6h2g&ab_channel=kerwinpogi092">
+      YOU can become the very best.*</a>
+    </p>
+    <p class="warning m-0">*if you follow this link to the best theme song ever, be warned of the volume</p>
     <!-- Add search input field bind value of searchPoke to it-->
-    <input v-model="searchPoke" type="text" class="search text-center rounded-pill border border-dark m-3" placeholder="Search Pokémon by name or ID (requires 3 characters)">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        Sort by
-      </button>
-      <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#" @click="sortAscendingID">ID &#8593;(default)</a>
-        <a class="dropdown-item" href="#" @click="sortDescendingID">ID &#8595;</a>
-        <a class="dropdown-item" href="#" @click="sortAscendingName">Name A-Z &#8593;</a>
-        <a class="dropdown-item" href="#" @click="sortDescendingName">Name Z-A &#8595;</a>
+    <input v-model="searchPoke" type="text" class="search text-center rounded-pill border border-dark m-3" placeholder="Search Pokémon...">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-4 mx-auto">
+        <div class="dropdown">
+          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort by <span :sortOption="sortOption">{{ sortOption }}</span>
+          </button>
+          <div class="text-center dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#" @click="sortAscendingID">ID &#8593;(default)</a>
+            <a class="dropdown-item" href="#" @click="sortDescendingID">ID &#8595;</a>
+            <a class="dropdown-item" href="#" @click="sortAscendingName">Name A-Z</a>
+            <a class="dropdown-item" href="#" @click="sortDescendingName">Name Z-A</a>
+          </div>
+        </div>
       </div>
     </div>
     <GridCards :pokemon="filteredPokemon" /> <!-- Display filtered pokemon -->
@@ -32,27 +37,6 @@ import GridCards from '@/components/GridCards.vue'
 const pokemon = ref([])
 const searchPoke = ref('')
 const errorMessage = ref('')
-const sortOption = ref('')
-
-// Define ways to sort through Pokemon
-const sortAscendingID = () => {
-  sortOption.value = 'ascending-id'
-  pokemon.value.sort((a, b) => a.id - b.id)
-}
-const sortDescendingID = () => {
-  sortOption.value = 'descending-id'
-  pokemon.value.sort((a, b) => b.id - a.id)
-}
-// Use localeCompare to compare strings and sort by the comparison
-const sortAscendingName = () => {
-  sortOption.value = 'ascending-name'
-  pokemon.value.sort((a, b) => a.name.localeCompare(b.name))
-}
-
-const sortDescendingName = () => {
-  sortOption.value = 'descending-name'
-  pokemon.value.sort((a, b) => b.name.localeCompare(a.name))
-}
 
 // Async function so while we wait other lines can load & pass in query which will be updated when searchPoke changes
 const fetchPokemon = async () => {
@@ -68,7 +52,7 @@ const fetchPokemon = async () => {
       const id = pokemonData.id
       const weight = Math.round(((pokemonData.weight * 0.1) + Number.EPSILON) * 100) / 100 // Convert Hectogram to Kilogram
       const height = Math.round(((pokemonData.height * 0.1) + Number.EPSILON) * 100) / 100 // Convert Decimeters to Meters
-      const type = pokemonData.types[0].type.name.toUpperCase()
+      const type = pokemonData.types[0].type.name.charAt(0).toUpperCase() + pokemonData.types[0].type.name.slice(1)
       const name = pokemonData.name.toUpperCase() // Want name to be all Uppercase
       const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
       const url = `https://www.pokemon.com/us/pokedex/${name}`
@@ -98,7 +82,7 @@ const filteredPokemon = computed(() => {
     return pokemon.value // We only start searching after 3 characters have been typed, otherwise we return all Pokemon
   }
   return pokemon.value.filter(poke => // Filter the data we have by the string we are given
-    poke.name.toLowerCase().includes(searchValue) || String(poke.id) === searchValue
+    poke.name.toLowerCase().includes(searchValue)
   )
 })
 // Once component is mounted we call function
@@ -106,23 +90,47 @@ onMounted(() => {
   fetchPokemon()
 })
 
+// Define ways to sort displayed Pokemon
+const sortOption = ref('ID \u2191')
+
+const sortAscendingID = () => {
+  sortOption.value = 'ID \u2191'
+  pokemon.value.sort((a, b) => a.id - b.id)
+}
+const sortDescendingID = () => {
+  sortOption.value = 'ID \u2193'
+  pokemon.value.sort((a, b) => b.id - a.id)
+}
+// Use localeCompare to compare strings and sort by the comparison
+const sortAscendingName = () => {
+  sortOption.value = 'Name A-Z'
+  pokemon.value.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+const sortDescendingName = () => {
+  sortOption.value = 'Name Z-A'
+  pokemon.value.sort((a, b) => b.name.localeCompare(a.name))
+}
+
 </script>
 
 <style>
-.welcome {
-  max-width: 750px;
-  margin: 0 auto;
-}
 
 button {
   background-color: white;
 }
 .search {
   padding: 2px;
-  width: 400px;
+  width: 80%;
+  max-width: 250px;
 }
 
 .warning {
   font-size: 13px;
+  text-align: center;
+}
+
+.dropdown-menu {
+  width: 180px;
 }
 </style>

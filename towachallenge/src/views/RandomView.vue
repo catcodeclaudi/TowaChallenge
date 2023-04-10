@@ -1,7 +1,7 @@
 <template>
-  <div class="random">
+  <div class="random m-2">
     <h2>Random Pokémon Fact Generator</h2>
-    <p>If you click the card you will be redirected to the official Pokédex Page!</p>
+    <p>If you click the card a new tab will be opened, leading you to the official Pokédex entry!</p>
     <button class="randomize rounded-pill border border-dark m-3" @click="fetchPokemon"> Surprise me! </button>
     <GridCards :pokemon="pokemon" />
     <p class="errorMessage" v-if="errorMessage">{{ errorMessage }}</p>

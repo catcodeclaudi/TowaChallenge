@@ -10,21 +10,11 @@
                         <img :src="poke.image" class="card-image" :alt="poke.name">
                         <div class="card-body">
                             <h5 class="titleOfCard card-title">{{ poke.name }}</h5>
-                            <p v-if="poke.id" class="card-text m-1">
-                                ID: {{ poke.id }}
-                            </p>
-                            <p v-if="poke.height" class="card-text m-1">
-                                Height: {{ poke.height }} m
-                            </p>
-                            <p v-if="poke.weight" class="card-text m-1">
-                                Weight: {{ poke.weight }} kg
-                            </p>
-                            <p v-if="poke.type" class="card-text m-1">
-                                Type: {{ poke.type }}
-                            </p>
-                            <p v-if="poke.description" class="card-text m-1">
-                                Fact: {{ poke.description }}
-                            </p>
+                            <p v-if="poke.id" class="card-text m-1">ID: {{ poke.id }}</p>
+                            <p v-if="poke.height" class="card-text m-1">Height: {{ poke.height }} m</p>
+                            <p v-if="poke.weight" class="card-text m-1">Weight: {{ poke.weight }} kg</p>
+                            <p v-if="poke.type" class="card-text m-1">Type: {{ poke.type }}</p>
+                            <p v-if="poke.description" class="card-text m-1">Fact: {{ poke.description }}</p>
                         </div>
                     </div>
                 </div>
