@@ -17,6 +17,16 @@
         </div>
 </template>
 
+<script>
+import NavRouter from '@/components/NavRouter.vue'
+
+export default {
+  components: {
+    NavRouter
+  }
+}
+</script>
+
 <style>
 footer {
   font-size: 13px;
