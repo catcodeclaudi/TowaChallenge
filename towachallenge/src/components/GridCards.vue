@@ -6,15 +6,24 @@
             <!--Give class to make grid responsive for every device, in case media queries don't work or different size-->
             <div v-for="poke in pokemon" :key="poke.id" :pokemon="poke" class="col-12 col-md-6 col-lg-4 mx-auto">
                 <div @click="RedirectToLink(poke.url)"> <!--We want the whole card to be clickable, create method because it is cleaner-->
-                    <div class="card-with-radius bg-dark w-100" title="Click to learn more (Opens new tab to external website)">
+                    <div class="card-with-radius bg-dark w-100" title="Click to learn more! (Opens in new tab)">
                         <img :src="poke.image" class="card-image" :alt="poke.name">
                         <div class="card-body">
-                            <h5 class="card-title">{{ poke.name }}</h5>
-                            <p class="card-text">
-                                ID: {{ poke.id }}<br>
-                                Height: {{ poke.height }} ft<br>
-                                Weight: {{ poke.weight }} lbs<br>
-                                Type: {{ poke.type }}<br>
+                            <h5 class="titleOfCard card-title">{{ poke.name }}</h5>
+                            <p v-if="poke.id" class="card-text m-1">
+                                ID: {{ poke.id }}
+                            </p>
+                            <p v-if="poke.height" class="card-text m-1">
+                                Height: {{ poke.height }} m
+                            </p>
+                            <p v-if="poke.weight" class="card-text m-1">
+                                Weight: {{ poke.weight }} kg
+                            </p>
+                            <p v-if="poke.type" class="card-text m-1">
+                                Type: {{ poke.type }}
+                            </p>
+                            <p v-if="poke.description" class="card-text m-1">
+                                Fact: {{ poke.description }}
                             </p>
                         </div>
                     </div>
@@ -61,13 +70,14 @@ export default {
 }
 
 .card-body {
-    height: 150px;
-    margin: 5px;
+    height: auto;
+    margin: 15px;
 }
 
-.card-title, .card-text {
-    color:rgb(204, 209, 209);
+.container .card-with-radius .card-title, .card-text {
+  color: rgb(204, 209, 209);
 }
+
 /* We want the hover over the card as clickable to be ovious*/
 .card-with-radius:hover {
     cursor:pointer;

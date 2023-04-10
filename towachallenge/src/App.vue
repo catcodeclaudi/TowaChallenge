@@ -1,6 +1,6 @@
 <template>
   <header> <!--Header with Logo and Navbar-->
-    <img class="logoTop" alt="catnyou logo" src="@/assets/logo.png">
+    <img class="logoTop" alt="logo" src="@/assets/logo.png">
     <NavRouter /> <!--Navigation Bar Component-->
   </header>
   <main> <!--Insert .vue for whichever router is selected-->
@@ -9,7 +9,7 @@
   <footer> <!--Footer with Logo, Navbar and Address-->
         <div class="container"> <!--Responsive Bootstrap container-->
           <div class="col">
-            <img class="logoBottom" alt="catnyou logo" src="@/assets/logo.png">
+            <img class="logoBottom" alt="logo" src="@/assets/logo.png">
           </div>
           <div class="col">
             <NavRouter /> <!--Navigation Bar Component-->
@@ -18,7 +18,7 @@
             <address>Pallet House<br> <!--address for easier SEO-->
             Pallet Town<br>
             Kanto</address>
-            <div>Contact us via <a href=mailto:catnyou@gmail.com>E-Mail</a>
+            <div>Contact us via <a href=mailto:theverybest@gmail.com>E-Mail</a>
              or <a href=tel:+999999999> Phone</a></div>
              <div>theverybest@gmail.com | +999 999 999</div>
           </div>

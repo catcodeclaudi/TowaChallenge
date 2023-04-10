@@ -1,63 +1,71 @@
 <template>
-    <div class="random">
-      <h2>Random Pokemon Generator</h2>
-      <p>If you click the card you will be redirected to the official Pokédex Page of the Pokémon!</p>
-      <!--Call fetchpokemon when clicked so that more random pokemon will be displayed-->
-      <button class="randomize rounded-pill border border-dark m-3" title="Reload Pokemon" @click="fetchPokemon"> Surprise me! </button>
-      <GridCards :pokemon="pokemon" /> <!--Insert GridCards component with its items to display pokemon-->
-    </div>
-  </template>
+  <div class="random">
+    <h2>Random Pokémon Fact Generator</h2>
+    <p>If you click the card you will be redirected to the official Pokédex Page!</p>
+    <button class="randomize rounded-pill border border-dark m-3" @click="fetchPokemon"> Surprise me! </button>
+    <GridCards :pokemon="pokemon" />
+    <p class="errorMessage" v-if="errorMessage">{{ errorMessage }}</p>
+  </div>
+</template>
 
-<script setup> // I WANT TO MAKE A COMPONENT OUT OF THIS BECAUSE OF REPETITION
+<script setup>
 import { ref, onMounted } from 'vue'
 import GridCards from '@/components/GridCards.vue'
-// Define reactive variable to store Pokemon so re-render of component is triggered
+
 const pokemon = ref([])
-// Async so while we wait other lines can load
+const errorMessage = ref('')// Define errorMessage as reactive so that when it changes -> re-render & display
+
 const fetchPokemon = async () => {
   try {
-    // Create Random Number to insert in URL & exclude newest generation bc we don't have good pictures (1000 Pokemon)
     const randomNumber = Math.floor(Math.random() * 916)
-    // Fetch Data from API and extract JSON data from response, load only 20
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${randomNumber}&limit=10`)
+    const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${randomNumber}&limit=1`)
     const apidata = await res.json()
-    // Use Promise to await response of fetching data
-    // Save fetched data if successful in variable
+    // Array of promises is dynamically created (map, async/await) so we can check with Promise.all later if resolved
     const pokemonPromises = apidata.results.map(async (result) => {
       const response = await fetch(result.url)
       const pokemonData = await response.json()
-      const { id, height, weight } = pokemonData
+      const id = pokemonData.id
       const name = pokemonData.name.toUpperCase()
-      const type = pokemonData.types[0].type.name.toUpperCase()
       const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
       const url = `https://www.pokemon.com/us/pokedex/${name}`
+      const description = await fetchPokemonDescription(pokemonData.species.url)
       return {
         id,
         name,
         image,
-        height,
-        weight,
         url,
-        type
+        description
       }
     })
-    // If successful we save it in pokemon.value, otherwise send error
+    // See if all Promises have resolved and if so save in pokemon.value if not error
     const pokemonList = await Promise.all(pokemonPromises)
     pokemon.value = pokemonList
   } catch (error) {
     console.log(error)
+    errorMessage.value = 'Loading Pokémon failed, please retry or contact me so I can fix it'
   }
 }
-// Once component is mounted we call function
+// Get Pokemon Description/Fact from earlier fetched URL and find english description
+const fetchPokemonDescription = async (speciesUrl) => {
+  try {
+    const speciesResponse = await fetch(speciesUrl)
+    const speciesData = await speciesResponse.json()
+    const description = speciesData.flavor_text_entries.find(entry => entry.language.name === 'en').flavor_text
+    return description
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 onMounted(() => {
   fetchPokemon()
 })
 </script>
 
-  <style>
-  button {
-    background-color: white;
-    width: 180px;
-    padding: 2px;
-  }
-  </style>
+<style>
+button {
+  background-color: white;
+  width: 180px;
+  padding: 2px;
+}
+</style>
