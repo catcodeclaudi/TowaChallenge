@@ -13,15 +13,15 @@
     <div class="row">
       <div class="col-12 col-md-6 col-lg-4 mx-auto">
         <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
             Sort by <span :sortOption="sortOption">{{ sortOption }}</span>
           </button>
-          <div class="text-center dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
-            <a class="dropdown-item" href="#" @click="sortAscendingID">ID &#8593;(default)</a>
-            <a class="dropdown-item" href="#" @click="sortDescendingID">ID &#8595;</a>
-            <a class="dropdown-item" href="#" @click="sortAscendingName">Name A-Z</a>
-            <a class="dropdown-item" href="#" @click="sortDescendingName">Name Z-A</a>
-          </div>
+          <ul class="text-center dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+            <li class="dropdown-item" href="#" @click="sortAscendingID">ID &#8593;(default)</li>
+            <li class="dropdown-item" href="#" @click="sortDescendingID">ID &#8595;</li>
+            <li class="dropdown-item" href="#" @click="sortAscendingName">Name A-Z</li>
+            <li class="dropdown-item" href="#" @click="sortDescendingName">Name Z-A</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -115,6 +115,9 @@ const sortDescendingName = () => {
 </script>
 
 <style>
+.dropdown-menu {
+  z-index: 999;
+}
 
 button {
   background-color: white;
